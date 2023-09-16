@@ -47,6 +47,7 @@ class BinaryTree:
     def insert(self, data) -> None:
         newNode = BinaryTreeNode(data);
         self.stack.append(newNode)
+        self.size += 1;
         
         if(self.root == None):
             self.root = newNode;
@@ -56,17 +57,19 @@ class BinaryTree:
             else:
                 self.root.right = newNode;
                 
-        self.size += 1;
-        
+    def __len__(self) -> int:
+        return self.size;
+    
     def __iter__(self) -> None:
         return self;
     
     def __next__(self):
-        curr =  self.stack[self._index];
-        while(curr):
-            yield curr;
+        if(self._index < len(self)):
+            curr =  self.stack[self._index];
             self._index += 1;
-        raise StopIteration
+            return curr;
+        else:
+            raise StopIteration
         
 
 class HashTable:
@@ -160,7 +163,14 @@ class LinkedList:
             current.next = newNode
         else:
             self.head = newNode
-            
+    
+    def search(self, key) -> Node or None:
+        for node in self:
+            print(node.data.id)
+            if(node.data.id == key):
+                return node;
+        return None;
+    
     def __repr__(self) -> str:
         node = self.head
         nodes = []
@@ -188,9 +198,4 @@ class LinkedList:
 
 
 if __name__ == '__main__':
-    ht = BinaryTree();
-    for i in range((5)):
-        ht.insert(Data(i));
-    
-    for l in ht:
-        print(l)
+    pass;

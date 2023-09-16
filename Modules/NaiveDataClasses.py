@@ -8,12 +8,11 @@ class Data:
         return data;
     
     def _getID(self) -> int:
-        import random
-        return random.randint(1,9999);
+        return int(self.data)
     
     def __init__(self, data) -> None:
-        self.id         = self._getID();
         self.data       = self._getData(data);
+        self.id         = self._getID();
         
     def __repr__(self) -> str:
         return f"Data({self.data})";
